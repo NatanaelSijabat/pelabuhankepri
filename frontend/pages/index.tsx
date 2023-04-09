@@ -141,10 +141,7 @@ const Index = () => {
               <p className="text-3xl pb-4 hover:text-secondary">
                 What is Lorem Ipsum?
               </p>
-              <img
-                src="https://flowbite.com/docs/images/blog/image-1.jpg"
-                alt=""
-              />
+              <Image src="/profile.jpg" alt="image" width={200} height={100} />
               <p className="text-xl text-justify">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy

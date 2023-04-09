@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Menu } from "antd";
 import type { MenuMode } from "rc-menu/lib/interface";
 import { MenuProps } from "antd";
+import Link from "next/link";
 
 type Props = {
   mode?: MenuMode;
@@ -27,74 +28,109 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(
-    <a href="/" className="capitalize">
+    <Link href="/" className="capitalize">
       beranda
-    </a>,
+    </Link>,
     "1"
   ),
   getItem(<span className="capitalize">tentang kami</span>, "sub1", null, [
     getItem(
-      <a className="capitalize" href="/tentangkami">
+      <Link className="capitalize" href="/tentangkami">
         sekilas perusahaan
-      </a>,
+      </Link>,
       "2"
     ),
     getItem(
-      <a className="capitalize" href="/sejarah">
+      <Link className="capitalize" href="/sejarah">
         sejarah
-      </a>,
+      </Link>,
       "3"
     ),
     getItem(
-      <a className="capitalize" href="/visidanmisi">
+      <Link className="capitalize" href="/visidanmisi">
         visi dan misi
-      </a>,
+      </Link>,
       "4"
     ),
     getItem(
-      <a className="capitalize" href="/strukturorganisasi">
+      <Link className="capitalize" href="/strukturorganisasi">
         struktur organisasi
-      </a>,
+      </Link>,
       "5"
     ),
     getItem(
-      <a className="capitalize" href="/sertifikatdanpenghargaan">
+      <Link className="capitalize" href="/sertifikatdanpenghargaan">
         sertifikat & penghargaan
-      </a>,
+      </Link>,
       "6"
     ),
   ]),
   getItem(
-    <a className="capitalize" href="/produkdanlayanan">
+    <Link className="capitalize" href="/produkdanlayanan">
       produk dan layanan
-    </a>,
+    </Link>,
     "7"
   ),
   getItem(
-    <a className="capitalize" href="/galeri">
+    <Link className="capitalize" href="/galeri">
       galeri
-    </a>,
+    </Link>,
     "8"
   ),
   getItem(
-    <a className="capitalize" href="/artikel">
+    <Link className="capitalize" href="/artikel">
       artikel
-    </a>,
+    </Link>,
     "9"
   ),
   getItem(<span className="capitalize">investor relation</span>, "sub2", null, [
-    getItem(<a className="capitalize">prospek penawaran umum</a>, "10"),
-    getItem(<a className="capitalize">laporan tahun</a>, "11"),
-    getItem(<a className="capitalize">laporan keuangan</a>, "12"),
-    getItem(<a className="capitalize">informasi rups</a>, "13"),
-    getItem(<a className="capitalize">informasi saham</a>, "14"),
-    getItem(<a className="capitalize">informasi obligasi</a>, "15"),
-    getItem(<a className="capitalize">informasi deviden</a>, "16"),
+    getItem(
+      <Link className="capitalize" href="/">
+        prospek penawaran umum
+      </Link>,
+      "10"
+    ),
+    getItem(
+      <Link href="/" className="capitalize">
+        laporan tahun
+      </Link>,
+      "11"
+    ),
+    getItem(
+      <Link href="/" className="capitalize">
+        laporan keuangan
+      </Link>,
+      "12"
+    ),
+    getItem(
+      <Link href="/" className="capitalize">
+        informasi rups
+      </Link>,
+      "13"
+    ),
+    getItem(
+      <Link href="/" className="capitalize">
+        informasi saham
+      </Link>,
+      "14"
+    ),
+    getItem(
+      <Link href="/" className="capitalize">
+        informasi obligasi
+      </Link>,
+      "15"
+    ),
+    getItem(
+      <Link href="/" className="capitalize">
+        informasi deviden
+      </Link>,
+      "16"
+    ),
   ]),
   getItem(
-    <a className="capitalize" href="/kontak">
+    <Link className="capitalize" href="/kontak">
       kontak kami
-    </a>,
+    </Link>,
     "17"
   ),
 ];
@@ -111,7 +147,6 @@ const LeftMenu = ({ mode }: Props) => {
       mode={mode}
       onClick={onClick}
       items={items}
-      // className="px-20"
     />
   );
 };
