@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Menu } from "antd";
-import type { MenuMode } from "rc-menu/lib/interface";
 import { MenuProps } from "antd";
 import Link from "next/link";
+import type { MenuMode } from "rc-menu/lib/interface";
 
 type Props = {
   mode?: MenuMode;
+  onKlik?: MenuProps["onClick"];
 };
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -85,7 +86,7 @@ const items: MenuItem[] = [
   ),
   getItem(<span className="capitalize">investor relation</span>, "sub2", null, [
     getItem(
-      <Link className="capitalize" href="/">
+      <Link className="capitalize" href="/prospekpenawaranumum">
         prospek penawaran umum
       </Link>,
       "10"
@@ -135,17 +136,18 @@ const items: MenuItem[] = [
   ),
 ];
 
-const LeftMenu = ({ mode }: Props) => {
-  const [current, setCurrent] = useState("beranda");
+const LeftMenu = ({ mode, onKlik }: Props) => {
+  // const [current, setCurrent] = useState("beranda");
 
-  const onClick: MenuProps["onClick"] = (e) => {
-    setCurrent(e.key);
-  };
+  // const onClick: MenuProps["onClick"] = (e) => {
+  //   setCurrent(e.key);
+  // };
+
   return (
     <Menu
-      defaultSelectedKeys={[current]}
+      defaultSelectedKeys={["beranda"]}
       mode={mode}
-      onClick={onClick}
+      onClick={onKlik}
       items={items}
     />
   );

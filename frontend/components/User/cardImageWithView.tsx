@@ -1,24 +1,30 @@
 import { Card, Image } from "antd";
 
-const { Meta } = Card;
-
 type Props = {
   imgSrc: string;
   titleName: string;
-  deskripsiName?: string;
 };
 
-const CardImageWithPreview = ({ imgSrc, titleName, deskripsiName }: Props) => {
+const CardImageWithPreview = ({ imgSrc, titleName }: Props) => {
   return (
     <Card
-      className="w-full"
-      cover={<Image alt="image" src={imgSrc} className="h-fit w-10" />}
-    >
-      <Meta
-        title={<p className="capitalize">{titleName}</p>}
-        description={<p className="capitalize">{deskripsiName}</p>}
-      />
-    </Card>
+      cover={
+        <Image
+          alt="image"
+          src={imgSrc}
+          className="w-full"
+          preview={{
+            mask: (
+              <p className="text-xl p-10 sm:p-0 capitalize text-center font-semibold">
+                {titleName}
+              </p>
+            ),
+          }}
+        />
+      }
+      style={{ width: 400 }}
+      bodyStyle={{ padding: 0 }}
+    />
   );
 };
 

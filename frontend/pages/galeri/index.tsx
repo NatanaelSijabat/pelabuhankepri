@@ -3,26 +3,26 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/User/Header";
 import CardImageWithPreview from "../../components/User/cardImageWithView";
 import config from "../../utils/config";
-import Router from "next/router";
 import axios from "axios";
-import { NextPage } from "next";
+import Router from "next/router";
+
 import { Pagination } from "antd";
 
-interface Sertifikat {
+interface Galeri {
   id: number;
   title: string;
   image: string;
 }
 
-interface SertifikatPageProps {
-  sertifikatData: Sertifikat[];
+interface GalleryPageProps {
+  galeriData: Galeri[];
   currentPage: number;
   totalCount: number;
   perPage: number;
 }
 
-const Index: NextPage<SertifikatPageProps> = ({
-  sertifikatData,
+const Index: React.FC<GalleryPageProps> = ({
+  galeriData,
   currentPage,
   totalCount,
   perPage,
@@ -54,11 +54,11 @@ const Index: NextPage<SertifikatPageProps> = ({
   } else {
     content = (
       <>
-        {sertifikatData.map((sertifikat) => (
-          <div className="sm:w-full sm:px-4 pb-8" key={sertifikat.id}>
+        {galeriData.map((galeri) => (
+          <div key={galeri.id} className="w-3/4 sm:w-full pt-8 sm:px-4">
             <CardImageWithPreview
-              imgSrc={config.ImagePath + `/sertifikat/${sertifikat.image}`}
-              titleName={sertifikat.title}
+              imgSrc={config.ImagePath + `/galeri/${galeri.image}`}
+              titleName={galeri.title}
             />
           </div>
         ))}
@@ -69,20 +69,15 @@ const Index: NextPage<SertifikatPageProps> = ({
   return (
     <>
       <Head>
-        <title>
-          PT PELABUHAN KEPRI (PERSERODA) - Sertifikat dan Penghargaan
-        </title>
+        <title>PT PELABUHAN KEPRI (PERSERODA) - Galeri</title>
         <meta name="description" content="PT PELABUHAN KEPRI (PERSERODA)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header
-        name="sertifikat dan Penghargaan"
-        background="bg-produkdanlayanan"
-      />
-      <div className="sm:gap-4 sm:py-6 grid grid-flow-row sm:grid-cols-3 justify-center items-center w-full pb-10 pt-20">
+      <Header name="galeri kami" background="bg-produkdanlayanan" />
+      <div className="sm:gap-4 sm:py-6 grid grid-flow-row sm:grid-cols-3 justify-center items-center w-full pt-10">
         {content}
       </div>
-      <div className="flex justify-center items-center mb-10">
+      <div className="flex justify-center items-center my-10">
         <Pagination
           current={currentPage}
           responsive={true}
@@ -98,13 +93,14 @@ const Index: NextPage<SertifikatPageProps> = ({
 export const getServerSideProps = async ({ query }: any) => {
   const page = query.page ? parseInt(query.page.toString(), 10) : 1;
   const limit = query.limit ? parseInt(query.limit.toString(), 10) : 3;
+
   const res = await axios.get(
-    config.API_URL + `/sertifikat?page=${page}&limit=${limit}`
+    config.API_URL + `/galeri?page=${page}&limit=${limit}`
   );
 
   return {
     props: {
-      sertifikatData: res.data.data,
+      galeriData: res.data.data,
       totalCount:
         res.data.totalCount !== undefined ? res.data.totalCount : null,
       currentPage:

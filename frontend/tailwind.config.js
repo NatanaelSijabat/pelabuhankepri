@@ -8,9 +8,6 @@ module.exports = {
     "./node_modules/flowbite-react/**/*.js",
   ],
   theme: {
-    // height: {
-    //   heightHead: "calc(100vh-105px)",
-    // },
     colors: {
       primary: "#1F4692",
       secondary: "#25A9E9",

@@ -1,28 +1,30 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/User/Header";
-import CardImageWithPreview from "../../components/User/cardImageWithView";
-import config from "../../utils/config";
-import Router from "next/router";
+import { List, Pagination } from "antd";
+import Link from "next/link";
 import axios from "axios";
-import { NextPage } from "next";
-import { Pagination } from "antd";
+import config from "../../utils/config";
+import moment from "moment";
+import { FieldTimeOutlined } from "@ant-design/icons";
+import Router from "next/router";
 
-interface Sertifikat {
+interface Artikel {
   id: number;
   title: string;
+  createdAt: string;
   image: string;
 }
 
-interface SertifikatPageProps {
-  sertifikatData: Sertifikat[];
+interface ArtikelPageProps {
+  artikelData: Artikel[];
   currentPage: number;
   totalCount: number;
   perPage: number;
 }
 
-const Index: NextPage<SertifikatPageProps> = ({
-  sertifikatData,
+const Index: React.FC<ArtikelPageProps> = ({
+  artikelData,
   currentPage,
   totalCount,
   perPage,
@@ -32,13 +34,8 @@ const Index: NextPage<SertifikatPageProps> = ({
   const stopLoading = () => setLoading(false);
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", startLoading);
+    Router.events.off("routeChangeStart", startLoading);
     Router.events.on("routeChangeComplete", stopLoading);
-
-    return () => {
-      Router.events.off("routeChangeStart", startLoading);
-      Router.events.off("routeChangeComplete", stopLoading);
-    };
   }, []);
 
   const paginateHandle = (selectedPage: number) => {
@@ -54,34 +51,44 @@ const Index: NextPage<SertifikatPageProps> = ({
   } else {
     content = (
       <>
-        {sertifikatData.map((sertifikat) => (
-          <div className="sm:w-full sm:px-4 pb-8" key={sertifikat.id}>
-            <CardImageWithPreview
-              imgSrc={config.ImagePath + `/sertifikat/${sertifikat.image}`}
-              titleName={sertifikat.title}
-            />
-          </div>
-        ))}
+        <List
+          itemLayout="horizontal"
+          dataSource={artikelData}
+          renderItem={(item) => (
+            <List.Item
+              actions={[<Link href={`/artikel/${item.id}`}>Baca</Link>]}
+            >
+              <List.Item.Meta
+                title={
+                  <Link
+                    href={`/artikel/${item.id}`}
+                    className="capitalize text-xl"
+                  >
+                    {item.title}
+                  </Link>
+                }
+                description={
+                  <>
+                    <FieldTimeOutlined />
+                    {moment(item.createdAt).format("DD-MMMM-YYYY")}
+                  </>
+                }
+              />
+            </List.Item>
+          )}
+        />
       </>
     );
   }
-
   return (
-    <>
+    <div>
       <Head>
-        <title>
-          PT PELABUHAN KEPRI (PERSERODA) - Sertifikat dan Penghargaan
-        </title>
+        <title>PT PELABUHAN KEPRI (PERSERODA) - Artikel</title>
         <meta name="description" content="PT PELABUHAN KEPRI (PERSERODA)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header
-        name="sertifikat dan Penghargaan"
-        background="bg-produkdanlayanan"
-      />
-      <div className="sm:gap-4 sm:py-6 grid grid-flow-row sm:grid-cols-3 justify-center items-center w-full pb-10 pt-20">
-        {content}
-      </div>
+      <Header name="artikel kami" background="bg-produkdanlayanan" />
+      <div className="p-6 sm:p-20">{content}</div>
       <div className="flex justify-center items-center mb-10">
         <Pagination
           current={currentPage}
@@ -91,20 +98,21 @@ const Index: NextPage<SertifikatPageProps> = ({
           onChange={paginateHandle}
         />
       </div>
-    </>
+    </div>
   );
 };
 
 export const getServerSideProps = async ({ query }: any) => {
   const page = query.page ? parseInt(query.page.toString(), 10) : 1;
-  const limit = query.limit ? parseInt(query.limit.toString(), 10) : 3;
+  const limit = query.limit ? parseInt(query.limit.toString(), 10) : 2;
+
   const res = await axios.get(
-    config.API_URL + `/sertifikat?page=${page}&limit=${limit}`
+    config.API_URL + `/artikel?page=${page}&limit=${limit}`
   );
 
   return {
     props: {
-      sertifikatData: res.data.data,
+      artikelData: Array.isArray(res.data.data) ? res.data.data : [],
       totalCount:
         res.data.totalCount !== undefined ? res.data.totalCount : null,
       currentPage:
