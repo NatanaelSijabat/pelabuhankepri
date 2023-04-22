@@ -1,12 +1,13 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import Header from "../../components/User/Header";
-import CardImageWithPreview from "../../components/User/cardImageWithView";
+import Header from "../../components/user/Header";
+import CardImageWithPreview from "../../components/user/cardImageWithView";
 import config from "../../utils/config";
 import Router from "next/router";
 import axios from "axios";
 import { NextPage } from "next";
 import { Pagination } from "antd";
+import { MyPage } from "../../components/types";
 
 interface Sertifikat {
   id: number;
@@ -21,7 +22,7 @@ interface SertifikatPageProps {
   perPage: number;
 }
 
-const Index: NextPage<SertifikatPageProps> = ({
+const Index: MyPage<SertifikatPageProps> = ({
   sertifikatData,
   currentPage,
   totalCount,
@@ -114,4 +115,5 @@ export const getServerSideProps = async ({ query }: any) => {
   };
 };
 
+Index.Layout = "User";
 export default Index;

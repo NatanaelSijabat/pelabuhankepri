@@ -3,10 +3,11 @@ import Head from "next/head";
 // import { useRouter } from "next/router";
 import React from "react";
 import config from "../../utils/config";
-import Header from "../../components/User/Header";
+import Header from "../../components/user/Header";
 import Link from "next/link";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Image from "next/image";
+import { MyPage } from "../../components/types";
 
 interface Artikel {
   id: number;
@@ -20,7 +21,7 @@ interface ArtikelDetailPageProps {
   detailData: Artikel;
 }
 
-const ArtikelId: React.FC<ArtikelDetailPageProps> = ({ detailData }) => {
+const ArtikelId: MyPage<ArtikelDetailPageProps> = ({ detailData }) => {
   // const router = useRouter();
   // const { id, title } = router.query;
 
@@ -75,4 +76,5 @@ export const getServerSideProps = async ({ query }: any) => {
   };
 };
 
+ArtikelId.Layout = "User";
 export default ArtikelId;

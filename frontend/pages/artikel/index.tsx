@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import Header from "../../components/User/Header";
+import Header from "../../components/user/Header";
 import { List, Pagination } from "antd";
 import Link from "next/link";
 import axios from "axios";
@@ -8,6 +8,7 @@ import config from "../../utils/config";
 import moment from "moment";
 import { FieldTimeOutlined } from "@ant-design/icons";
 import Router from "next/router";
+import { MyPage } from "../../components/types";
 
 interface Artikel {
   id: number;
@@ -23,7 +24,7 @@ interface ArtikelPageProps {
   perPage: number;
 }
 
-const Index: React.FC<ArtikelPageProps> = ({
+const Index: MyPage<ArtikelPageProps> = ({
   artikelData,
   currentPage,
   totalCount,
@@ -54,6 +55,7 @@ const Index: React.FC<ArtikelPageProps> = ({
         <List
           itemLayout="horizontal"
           dataSource={artikelData}
+          rowKey={"id"}
           renderItem={(item) => (
             <List.Item
               actions={[<Link href={`/artikel/${item.id}`}>Baca</Link>]}
@@ -122,4 +124,5 @@ export const getServerSideProps = async ({ query }: any) => {
   };
 };
 
+Index.Layout = "User";
 export default Index;

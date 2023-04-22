@@ -1,8 +1,9 @@
 import Head from "next/head";
 import React from "react";
-import Header from "../../../components/User/Header";
+import Header from "../../../components/user/Header";
+import { MyPage } from "../../../components/types";
 
-export default function Index() {
+const Index: MyPage = () => {
   return (
     <>
       <Head>
@@ -24,4 +25,7 @@ export default function Index() {
       </div>
     </>
   );
-}
+};
+
+Index.Layout = "User";
+export default Index;

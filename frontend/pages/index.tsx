@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button, Card } from "antd";
 import Link from "next/link";
 import { FcCalendar } from "react-icons/fc";
+import { MyPage } from "../components/types";
 
 // interface Props {
 //   data: {
@@ -14,7 +15,7 @@ import { FcCalendar } from "react-icons/fc";
 // }
 
 const { Meta } = Card;
-const Index = () => {
+const Index: MyPage = () => {
   return (
     <>
       <Head>
@@ -207,3 +208,4 @@ const Index = () => {
 // };
 
 export default Index;
+Index.Layout = "User";

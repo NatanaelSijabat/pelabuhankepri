@@ -1,17 +1,18 @@
 import { useEffect } from "react";
-import UserLayouts from "../layouts/UserLayouts";
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import AOS from "aos";
+import { MyAppProps } from "../components/types";
+import { Layouts } from "../components/Layouts";
 import "aos/dist/aos.css";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: MyAppProps) {
   useEffect(() => {
     AOS.init();
   });
+  const Layout = Layouts[Component.Layout] ?? ((page) => page);
   return (
-    <UserLayouts>
+    <Layout>
       <Component {...pageProps} />
-    </UserLayouts>
+    </Layout>
   );
 }

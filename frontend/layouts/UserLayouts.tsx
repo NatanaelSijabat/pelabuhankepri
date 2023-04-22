@@ -1,6 +1,6 @@
 import React from "react";
-import Foot from "../components/User/footer/Foot";
-import Navbar from "../components/User/navbar/Index";
+import Foot from "../components/user/footer/Foot";
+import Navbar from "../components/user/navbar/Index";
 import { Layout } from "antd";
 
 type UserLayoutProps = {

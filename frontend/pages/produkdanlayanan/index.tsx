@@ -1,9 +1,10 @@
 import Head from "next/head";
 import React from "react";
-import Header from "../../components/User/Header";
-import CardImage from "../../components/User/cardImage";
+import Header from "../../components/user/Header";
+import CardImage from "../../components/user/cardImage";
+import { MyPage } from "../../components/types";
 
-export default function Index() {
+const Index: MyPage = () => {
   return (
     <>
       <Head>
@@ -46,4 +47,7 @@ export default function Index() {
       </div>
     </>
   );
-}
+};
+
+Index.Layout = "User";
+export default Index;
