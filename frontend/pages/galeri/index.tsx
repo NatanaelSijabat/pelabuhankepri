@@ -2,7 +2,6 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/user/Header";
 import CardImageWithPreview from "../../components/user/cardImageWithView";
-import config from "../../utils/config";
 import axios from "axios";
 import Router from "next/router";
 
@@ -58,7 +57,7 @@ const Index: MyPage<GalleryPageProps> = ({
         {galeriData.map((galeri) => (
           <div key={galeri.id} className="w-3/4 sm:w-full pt-8 sm:px-4">
             <CardImageWithPreview
-              imgSrc={config.ImagePath + `/galeri/${galeri.image}`}
+              imgSrc={process.env.ImagePath + `/galeri/${galeri.image}`}
               titleName={galeri.title}
             />
           </div>
@@ -96,7 +95,7 @@ export const getServerSideProps = async ({ query }: any) => {
   const limit = query.limit ? parseInt(query.limit.toString(), 10) : 3;
 
   const res = await axios.get(
-    config.API_URL + `/galeri?page=${page}&limit=${limit}`
+    process.env.API_URL + `/galeri?page=${page}&limit=${limit}`
   );
 
   return {

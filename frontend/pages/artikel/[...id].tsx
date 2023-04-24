@@ -1,8 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-// import { useRouter } from "next/router";
 import React from "react";
-import config from "../../utils/config";
 import Header from "../../components/user/Header";
 import Link from "next/link";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -22,11 +20,8 @@ interface ArtikelDetailPageProps {
 }
 
 const ArtikelId: MyPage<ArtikelDetailPageProps> = ({ detailData }) => {
-  // const router = useRouter();
-  // const { id, title } = router.query;
-
   const myLoader = ({ src }: any) => {
-    return `${config.ImagePath}/artikel/${detailData.image}`;
+    return `${process.env.ImagePath}/artikel/${detailData.image}`;
   };
 
   return (
@@ -52,7 +47,7 @@ const ArtikelId: MyPage<ArtikelDetailPageProps> = ({ detailData }) => {
               <Image
                 alt="image"
                 loader={myLoader}
-                src={config.ImagePath + `/artikel/${detailData.image}`}
+                src={process.env.ImagePath + `/artikel/${detailData.image}`}
                 width={900}
                 height={100}
               />

@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: MyAppProps) {
   useEffect(() => {
     AOS.init();
   });
-  const Layout = Layouts[Component.Layout] ?? ((page) => page);
+  const Layout = Layouts[Component.Layout] ?? ((page: any) => page);
   return (
     <Layout>
       <Component {...pageProps} />

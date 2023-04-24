@@ -2,10 +2,8 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/user/Header";
 import CardImageWithPreview from "../../components/user/cardImageWithView";
-import config from "../../utils/config";
 import Router from "next/router";
 import axios from "axios";
-import { NextPage } from "next";
 import { Pagination } from "antd";
 import { MyPage } from "../../components/types";
 
@@ -58,7 +56,7 @@ const Index: MyPage<SertifikatPageProps> = ({
         {sertifikatData.map((sertifikat) => (
           <div className="sm:w-full sm:px-4 pb-8" key={sertifikat.id}>
             <CardImageWithPreview
-              imgSrc={config.ImagePath + `/sertifikat/${sertifikat.image}`}
+              imgSrc={process.env.ImagePath + `/sertifikat/${sertifikat.image}`}
               titleName={sertifikat.title}
             />
           </div>
@@ -100,7 +98,7 @@ export const getServerSideProps = async ({ query }: any) => {
   const page = query.page ? parseInt(query.page.toString(), 10) : 1;
   const limit = query.limit ? parseInt(query.limit.toString(), 10) : 3;
   const res = await axios.get(
-    config.API_URL + `/sertifikat?page=${page}&limit=${limit}`
+    process.env.API_URL + `/sertifikat?page=${page}&limit=${limit}`
   );
 
   return {

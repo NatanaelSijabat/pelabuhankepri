@@ -4,7 +4,6 @@ import Header from "../../components/user/Header";
 import { List, Pagination } from "antd";
 import Link from "next/link";
 import axios from "axios";
-import config from "../../utils/config";
 import moment from "moment";
 import { FieldTimeOutlined } from "@ant-design/icons";
 import Router from "next/router";
@@ -109,7 +108,7 @@ export const getServerSideProps = async ({ query }: any) => {
   const limit = query.limit ? parseInt(query.limit.toString(), 10) : 2;
 
   const res = await axios.get(
-    config.API_URL + `/artikel?page=${page}&limit=${limit}`
+    process.env.API_URL + `/artikel?page=${page}&limit=${limit}`
   );
 
   return {

@@ -5,7 +5,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiOutlinePhone } from "react-icons/ai";
 import { SiMinutemailer } from "react-icons/si";
 import { BsInstagram } from "react-icons/bs";
-import config from "../../../utils/config";
 
 const Foot = () => {
   return (
@@ -22,7 +21,7 @@ const Foot = () => {
             </div>
             <div className="text-base text-justify">
               <Link
-                href={config.address}
+                href={process.env.address}
                 target="_blank"
                 rel="noopener norefferer"
               >
@@ -45,7 +44,7 @@ const Foot = () => {
             </div>
             <div className="text-justify text-base">
               <Link
-                href={config.email}
+                href={process.env.email}
                 target="_blank"
                 rel="noopener norefferer"
               >
@@ -59,7 +58,7 @@ const Foot = () => {
             </div>
             <div className="text-justify text-base">
               <Link
-                href={config.instagram}
+                href={process.env.instagram}
                 target="_blank"
                 rel="noopener norefferer"
               >
