@@ -7,6 +7,7 @@ import Router from "next/router";
 
 import { Pagination } from "antd";
 import { MyPage } from "../../components/types";
+import { galeri } from "../../utils/axios";
 
 interface Galeri {
   id: number;
@@ -94,9 +95,7 @@ export const getServerSideProps = async ({ query }: any) => {
   const page = query.page ? parseInt(query.page.toString(), 10) : 1;
   const limit = query.limit ? parseInt(query.limit.toString(), 10) : 3;
 
-  const res = await axios.get(
-    process.env.API_URL + `/galeri?page=${page}&limit=${limit}`
-  );
+  const res = await galeri.get(`?page=${page}&limit=${limit}`);
 
   return {
     props: {

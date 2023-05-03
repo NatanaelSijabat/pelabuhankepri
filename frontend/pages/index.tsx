@@ -4,18 +4,15 @@ import Image from "next/image";
 import { Button, Card } from "antd";
 import Link from "next/link";
 import { FcCalendar } from "react-icons/fc";
-import { MyPage } from "../components/types";
-
-// interface Props {
-//   data: {
-//     id: number;
-//     title: string;
-//     image: string;
-//   }[];
-// }
+import { MyPage } from "components/types";
+import { useIntl } from "react-intl";
 
 const { Meta } = Card;
 const Index: MyPage = () => {
+  const intl = useIntl();
+
+  const marquee = intl.formatMessage({ id: "page.home.marquee" });
+  const visidanmisi = intl.formatMessage({ id: "page.home.navbar2.sub3" });
   return (
     <>
       <Head>
@@ -26,7 +23,7 @@ const Index: MyPage = () => {
       <div className="h-[35rem] bg-slide bg-no-repeat relative mt-16 z-0">
         <br />
         <Marquee className="bg-secondary" speed={90}>
-          Jam Operasional : Senin - Jumat 8 am to 4 pm
+          {marquee}
         </Marquee>
       </div>
       <div className="flex flex-col sm:flex-row h-fit overflow-hidden">
@@ -35,7 +32,8 @@ const Index: MyPage = () => {
             <Meta
               title={
                 <span className="pt-32 text-center w-full sm:w-1/4 absolute text-white text-2xl">
-                  Pelabuhan Kepri <p className="text-sm">Visi dan Misi</p>
+                  Pelabuhan Kepri{" "}
+                  <p className="text-sm capitalize">{visidanmisi}</p>
                 </span>
               }
             />
@@ -81,19 +79,19 @@ const Index: MyPage = () => {
           </div>
         </Link>
       </div>
-      <div className="h-screen bg-about bg-cover sm:mb-6 sm:mt-10">
-        <div className="bg-blurr h-screen bg-cover">
+      <div className="h-screen bg-about bg-cover sm:mt-4">
+        <div className="bg-blurr bg-cover">
           <div className="grid grid-rows-2 sm:grid-cols-2">
-            <div className="p-20">
+            <div className="px-24">
               <Image
-                src="/profile.jpg"
+                src="/direktur.png"
                 alt="Image"
-                width={900}
+                width={400}
                 height={100}
                 quality={100}
               />
             </div>
-            <div className="p-9 sm:p-20">
+            <div className="p-9 sm:pt-32 sm:mr-20">
               <h1 className="capitalize text-4xl text-white">Direktur</h1>
               <br />
               <hr
@@ -199,13 +197,6 @@ const Index: MyPage = () => {
     </>
   );
 };
-
-// Index.getInitialProps = async () => {
-//   const req = await axios.get(APIConfig.API_URL + "/artikel");
-//   const res = await req.data.data;
-
-//   return { data: res };
-// };
 
 export default Index;
 Index.Layout = "User";

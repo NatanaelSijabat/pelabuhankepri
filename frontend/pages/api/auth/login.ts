@@ -2,14 +2,14 @@ import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import bodyParser from 'body-parser'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const jsonParser = bodyParser.json()
         jsonParser(req, res, async () => {
             if (req.method !== 'POST') throw new Error(`Method ${req.method} not allowed`);
 
-
             const { email, password } = req.body
+
             const response = await axios.post(process.env.auth + "/login", {
                 email, password
             })
@@ -30,3 +30,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         })
     }
 }
+
+export default handler

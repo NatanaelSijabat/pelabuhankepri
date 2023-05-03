@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "~antd/dist/reset.css";
+
+/* .ant-btn:not([disabled]) {
+  background: #1677ff !important;
+} */

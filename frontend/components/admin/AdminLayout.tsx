@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from "react";
-import Sidebar from "./sidebar";
+import Sidebar from "./drawer";
 const AdminLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <Sidebar />
-      <main>{children}</main>
+      <Sidebar>{children}</Sidebar>
     </>
   );
 };

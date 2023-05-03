@@ -11,6 +11,11 @@ const nextConfig = {
     email: "mailto:pt.pelabuhankepri@yahoo.com",
     instagram: "https://www.instagram.com/pelabuhankepri_pt/",
   },
+  i18n: {
+    locales: ["id", "en"],
+    defaultLocale: "id",
+    localeDetection: false,
+  },
 };
 
 module.exports = nextConfig;

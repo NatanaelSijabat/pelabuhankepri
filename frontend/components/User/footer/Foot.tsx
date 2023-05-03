@@ -9,7 +9,7 @@ import { BsInstagram } from "react-icons/bs";
 const Foot = () => {
   return (
     <Layout>
-      <div className="bg-secondary text-white">
+      <div className="bg-secondary text-white px-6 py-2">
         <div className="sm:p-6 pt-10">
           <div className="uppercase text-2xl text-left">
             Hubungi Kami <p>pt pelabuhan kepri</p>

@@ -5,8 +5,10 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./public/**/*.html",
-    "./node_modules/flowbite-react/**/*.js",
   ],
+  // corePlugins: {
+  //   preflight: false,
+  // },
   theme: {
     colors: {
       primary: "#1F4692",

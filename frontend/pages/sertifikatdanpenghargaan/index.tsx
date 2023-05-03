@@ -1,24 +1,12 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import Header from "../../components/user/Header";
-import CardImageWithPreview from "../../components/user/cardImageWithView";
+import Header from "components/user/Header";
+import CardImageWithPreview from "components/user/cardImageWithView";
 import Router from "next/router";
-import axios from "axios";
 import { Pagination } from "antd";
-import { MyPage } from "../../components/types";
-
-interface Sertifikat {
-  id: number;
-  title: string;
-  image: string;
-}
-
-interface SertifikatPageProps {
-  sertifikatData: Sertifikat[];
-  currentPage: number;
-  totalCount: number;
-  perPage: number;
-}
+import { MyPage } from "components/types";
+import { sertifikat } from "utils/axios";
+import { SertifikatPageProps } from "types/sertifikatType";
 
 const Index: MyPage<SertifikatPageProps> = ({
   sertifikatData,
@@ -97,9 +85,7 @@ const Index: MyPage<SertifikatPageProps> = ({
 export const getServerSideProps = async ({ query }: any) => {
   const page = query.page ? parseInt(query.page.toString(), 10) : 1;
   const limit = query.limit ? parseInt(query.limit.toString(), 10) : 3;
-  const res = await axios.get(
-    process.env.API_URL + `/sertifikat?page=${page}&limit=${limit}`
-  );
+  const res = await sertifikat.get(`?page=${page}&limit=${limit}`);
 
   return {
     props: {
